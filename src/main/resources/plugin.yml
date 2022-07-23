@@ -1,0 +1,4 @@
+name: UnprecendentedCustomizer
+version: '${project.version}'
+main: com.scoddle.unprecendentedcustomizer.UnprecendentedCustomizer
+api-version: 1.16
