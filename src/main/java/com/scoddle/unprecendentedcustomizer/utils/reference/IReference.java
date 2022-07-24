@@ -13,5 +13,6 @@ public interface IReference {
     String not_exist = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "player-not-exist");
     String error = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "error");
     String player_req = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "player-required");
+    String wrong_usage = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "wrong-usage");
 
 }

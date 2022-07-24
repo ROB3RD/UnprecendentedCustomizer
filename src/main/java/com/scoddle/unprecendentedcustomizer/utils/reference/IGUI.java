@@ -11,6 +11,7 @@ public abstract class IGUI {
 
 
     public void createGui(Player p, int size, String title) {
+        init();
         addItems();
         addItemMeta();
         setDisplayName();
