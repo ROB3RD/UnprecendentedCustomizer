@@ -1,10 +1,16 @@
 package com.scoddle.unprecendentedcustomizer.commands;
 
 import com.scoddle.unprecendentedcustomizer.utils.reference.ICMD;
+import org.apache.commons.lang.ObjectUtils;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
+
+import javax.naming.Name;
 
 public class AdminCommand implements ICMD {
 
@@ -19,6 +25,38 @@ public class AdminCommand implements ICMD {
                 return false;
             }
 
+            Player target;
+
+            try {
+                target = server.getPlayerExact(args[0]);
+            }catch (NullPointerException exception) {
+                methods.sendMessage(not_exist, player);
+                return false;
+            }
+
+            PersistentDataContainer dataContainer;
+            try {
+                dataContainer = target.getPersistentDataContainer();
+            }catch (NullPointerException exception) {
+                methods.sendMessage(error, player);
+                return false;
+            }
+
+            int admin;
+
+            try {
+                admin = dataContainer.get(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER);
+            }catch (NullPointerException exception) {
+                admin = 0;
+            }
+
+            if (admin == 0) {
+                dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 1);
+                methods.sendMessage();
+            }else if (admin == 1) {
+                dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 0);
+            }
+
         }else if (sender instanceof ConsoleCommandSender) {
 
             ConsoleCommandSender ccs = (ConsoleCommandSender) sender;
@@ -27,8 +65,6 @@ public class AdminCommand implements ICMD {
                 methods.sendConsoleMessage(wrong_usage);
                 return false;
             }
-
-
 
         }else return false;
         return true;
