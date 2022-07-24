@@ -1,5 +1,12 @@
-"no-perm":""
-"player-not-exist":""
-"error":""
-"player-required":""
-"wrong-usage":""
+"no-perm" : "&cYou don't have permission to execute this command!"
+"player-not-exist" : "&cThat player does not exist!"
+"error" : "&cSomething went wrong!"
+"player-required" : "&cYou are not a player."
+"wrong-usage" : "&cWrong usage of command!"
+"admin-success": "&a<player> &bis now an admin!"
+
+#Gui
+
+# JoinEvent gui
+"set-join-text" : "&aEdit Join message"
+"get-join-text" : "&aGet Join message"

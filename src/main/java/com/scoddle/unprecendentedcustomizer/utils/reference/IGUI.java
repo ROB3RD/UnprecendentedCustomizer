@@ -3,6 +3,7 @@ package com.scoddle.unprecendentedcustomizer.utils.reference;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -24,6 +25,7 @@ public abstract class IGUI {
     protected abstract void addItemMeta();
     protected abstract void setDisplayName();
     protected abstract void setItemMeta();
+    public abstract void onClick(InventoryClickEvent e);
 
     protected  void addItem(ItemStack stack, String displayName, Material material) {
         stack.setType(material);
