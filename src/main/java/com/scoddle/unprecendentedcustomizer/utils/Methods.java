@@ -22,4 +22,8 @@ public class Methods {
         return ChatColor.translateAlternateColorCodes('&', text);
     }
 
+    public String translatePlayerName(String text, Player player) {
+        return ChatColor.translateAlternateColorCodes('&', text.replace("<player>", player.getDisplayName()));
+    }
+
 }
