@@ -9,16 +9,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public abstract class IGUI {
 
-    Inventory gui;
 
     public void createGui(Player p, int size, String title) {
-        gui = Bukkit.createInventory(p, size, title);
-
         addItems();
         addItemMeta();
         setDisplayName();
         setItemMeta();
     }
+
+    protected abstract void init();
 
     protected abstract void addItems();
     protected abstract void addItemMeta();
@@ -30,9 +29,5 @@ public abstract class IGUI {
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(displayName);
         stack.setItemMeta(meta);
-    }
-
-    public Inventory getGui() {
-        return gui;
     }
 }
