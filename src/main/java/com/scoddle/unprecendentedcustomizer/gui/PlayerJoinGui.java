@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -152,7 +153,7 @@ public class PlayerJoinGui extends IGUI {
 
         if(capture) {
 
-            PersistentDataContainer dataContainer = playr.getPersistentDataContainer();
+            PersistentDataContainer dataContainer = player.getPersistentDataContainer();
             dataContainer.set(new NamespacedKey(plugin, "join-message"), PersistentDataType.STRING, message);
 
             join_msg = message;
@@ -165,11 +166,14 @@ public class PlayerJoinGui extends IGUI {
     }
 
     public void onPlayerJoin(PlayerJoinEvent e) {
-        ev = e;
+        /*ev = e;
         playr = e.getPlayer();
         join_msg = e.getJoinMessage();
         assert join_msg != null;
-        e.setJoinMessage(methods.translatePlayerName(join_msg, playr));
+        if(capture) {
+            e.setJoinMessage(methods.translatePlayerName(join_msg, playr));
+        }*/
+        System.out.println("Called onPlayerJoin in PlayerJoinGui");
     }
 
     public Inventory getGui() {

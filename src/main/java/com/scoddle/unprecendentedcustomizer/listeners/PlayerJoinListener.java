@@ -24,16 +24,18 @@ public class PlayerJoinListener implements Listener, IReference {
 
         try {
             joinMessage = dataContainer.get(new NamespacedKey(plugin, "join-message"), PersistentDataType.STRING);
-        }catch (NullPointerException exception) {
+            assert joinMessage != null;
+            e.setJoinMessage(methods.translatePlayerName(joinMessage, player));
+        }
+        catch (NullPointerException exception) {
             e.setJoinMessage(methods.translate("&a" + player.getDisplayName() + " &7has joined the server."));
             return;
         }
 
-        e.setJoinMessage(methods.translatePlayerName(joinMessage, player));
-
         //e.setJoinMessage(methods.translate("&a" + player.getDisplayName() + " &7has joined the server."));
 
-        PlayerJoinGui.instance.onPlayerJoin(e);
+        PlayerJoinGui playerJoinGui = new PlayerJoinGui();
+        playerJoinGui.onPlayerJoin(e);
     }
 
 }

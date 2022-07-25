@@ -30,7 +30,7 @@ public class AdminCommand implements ICMD {
             try {
                 target = server.getPlayerExact(args[0]);
             }catch (NullPointerException exception) {
-                methods.sendMessage(not_exist, player);
+                methods.sendMessage("", player);
                 return false;
             }
 
@@ -38,7 +38,7 @@ public class AdminCommand implements ICMD {
             try {
                 dataContainer = target.getPersistentDataContainer();
             }catch (NullPointerException exception) {
-                methods.sendMessage(error, player);
+                methods.sendMessage("", player);
                 return false;
             }
 
@@ -52,11 +52,11 @@ public class AdminCommand implements ICMD {
 
             if (admin == 0) {
                 dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 1);
-                methods.sendMessage(methods.translatePlayerName(admin_message1, target), player);
+                methods.sendMessage(methods.translatePlayerName("", target), player);
                 return true;
             }else if (admin == 1) {
                 dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 0);
-                methods.sendMessage(methods.translatePlayerName(admin_message2, target), player);
+                methods.sendMessage(methods.translatePlayerName("", target), player);
                 return true;
             }
 
@@ -74,7 +74,7 @@ public class AdminCommand implements ICMD {
             try {
                 target = server.getPlayerExact(args[0]);
             }catch (NullPointerException exception) {
-                methods.sendConsoleMessage(not_exist);
+                methods.sendConsoleMessage("not_exist");
                 return false;
             }
 
@@ -82,7 +82,7 @@ public class AdminCommand implements ICMD {
             try {
                 dataContainer = target.getPersistentDataContainer();
             }catch (NullPointerException exception) {
-                methods.sendConsoleMessage(error);
+                methods.sendConsoleMessage("error");
                 return false;
             }
 
@@ -96,11 +96,11 @@ public class AdminCommand implements ICMD {
 
             if (admin == 0) {
                 dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 1);
-                methods.sendConsoleMessage(methods.translatePlayerName(admin_message1, target));
+                methods.sendConsoleMessage(methods.translatePlayerName("admin_message1", target));
                 return true;
             }else if (admin == 1) {
                 dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 0);
-                methods.sendConsoleMessage(methods.translatePlayerName(admin_message2, target));
+                methods.sendConsoleMessage(methods.translatePlayerName("admin_message2", target));
                 return true;
             }
 
