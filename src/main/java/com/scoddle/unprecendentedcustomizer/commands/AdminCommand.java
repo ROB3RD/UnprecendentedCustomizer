@@ -52,9 +52,12 @@ public class AdminCommand implements ICMD {
 
             if (admin == 0) {
                 dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 1);
-                methods.sendMessage();
+                methods.sendMessage(methods.translatePlayerName(admin_message1, target), player);
+                return true;
             }else if (admin == 1) {
                 dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 0);
+                methods.sendMessage(methods.translatePlayerName(admin_message2, target), player);
+                return true;
             }
 
         }else if (sender instanceof ConsoleCommandSender) {
@@ -64,6 +67,41 @@ public class AdminCommand implements ICMD {
             if (args.length != 1) {
                 methods.sendConsoleMessage("");
                 return false;
+            }
+
+            Player target;
+
+            try {
+                target = server.getPlayerExact(args[0]);
+            }catch (NullPointerException exception) {
+                methods.sendConsoleMessage(not_exist);
+                return false;
+            }
+
+            PersistentDataContainer dataContainer;
+            try {
+                dataContainer = target.getPersistentDataContainer();
+            }catch (NullPointerException exception) {
+                methods.sendConsoleMessage(error);
+                return false;
+            }
+
+            int admin;
+
+            try {
+                admin = dataContainer.get(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER);
+            }catch (NullPointerException exception) {
+                admin = 0;
+            }
+
+            if (admin == 0) {
+                dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 1);
+                methods.sendConsoleMessage(methods.translatePlayerName(admin_message1, target));
+                return true;
+            }else if (admin == 1) {
+                dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 0);
+                methods.sendConsoleMessage(methods.translatePlayerName(admin_message2, target));
+                return true;
             }
 
         }else return false;

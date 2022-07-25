@@ -4,6 +4,7 @@ import com.scoddle.unprecendentedcustomizer.listeners.PlayerJoinListener;
 import com.scoddle.unprecendentedcustomizer.utils.reference.IGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -12,6 +13,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Objects;
 
@@ -148,6 +151,10 @@ public class PlayerJoinGui extends IGUI {
         Player player = e.getPlayer();
 
         if(capture) {
+
+            PersistentDataContainer dataContainer = playr.getPersistentDataContainer();
+            dataContainer.set(new NamespacedKey(plugin, "join-message"), PersistentDataType.STRING, message);
+
             join_msg = message;
             capture = false;
             e.setCancelled(true);
