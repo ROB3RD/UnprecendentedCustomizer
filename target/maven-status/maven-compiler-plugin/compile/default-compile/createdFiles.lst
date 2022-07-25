@@ -1,0 +1,16 @@
+com\scoddle\unprecendentedcustomizer\gui\PlayerJoinGui$1.class
+com\scoddle\unprecendentedcustomizer\UnprecendentedCustomizer.class
+com\scoddle\unprecendentedcustomizer\utils\Methods.class
+com\scoddle\unprecendentedcustomizer\utils\reference\ICMD.class
+com\scoddle\unprecendentedcustomizer\gui\PlayerCustomizerGui.class
+com\scoddle\unprecendentedcustomizer\listeners\PlayerJoinListener.class
+com\scoddle\unprecendentedcustomizer\listeners\PlayerChatListener.class
+com\scoddle\unprecendentedcustomizer\utils\reference\IGUI.class
+com\scoddle\unprecendentedcustomizer\gui\PlayerCustomizerGui$1.class
+com\scoddle\unprecendentedcustomizer\utils\GuiManager.class
+com\scoddle\unprecendentedcustomizer\gui\PlayerJoinGui.class
+com\scoddle\unprecendentedcustomizer\listeners\InventoryClickListener.class
+com\scoddle\unprecendentedcustomizer\commands\TestCommand.class
+com\scoddle\unprecendentedcustomizer\utils\reference\IReference.class
+com\scoddle\unprecendentedcustomizer\utils\LanguageFilesUtils.class
+com\scoddle\unprecendentedcustomizer\commands\AdminCommand.class
