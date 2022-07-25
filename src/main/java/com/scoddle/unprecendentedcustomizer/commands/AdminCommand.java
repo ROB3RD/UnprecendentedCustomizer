@@ -15,7 +15,7 @@ public class AdminCommand implements ICMD {
             Player player = (Player) sender;
 
             if (args.length != 1) {
-                methods.sendMessage(wrong_usage, player);
+                methods.sendMessage("", player);
                 return false;
             }
 
@@ -24,7 +24,7 @@ public class AdminCommand implements ICMD {
             ConsoleCommandSender ccs = (ConsoleCommandSender) sender;
 
             if (args.length != 1) {
-                methods.sendConsoleMessage(wrong_usage);
+                methods.sendConsoleMessage("");
                 return false;
             }
 

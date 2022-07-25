@@ -9,10 +9,10 @@ public interface IReference {
     UnprecendentedCustomizer plugin = UnprecendentedCustomizer.getPlugin(UnprecendentedCustomizer.class);
     Methods methods = new Methods();
 
-    String no_perm = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "no-perm");
+    /*String no_perm = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "no-perm");
     String not_exist = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "player-not-exist");
     String error = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "error");
     String player_req = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "player-required");
-    String wrong_usage = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "wrong-usage");
+    String wrong_usage = LanguageFilesUtils.getValue(plugin.getConfig().getString("language"), "wrong-usage");*/
 
 }

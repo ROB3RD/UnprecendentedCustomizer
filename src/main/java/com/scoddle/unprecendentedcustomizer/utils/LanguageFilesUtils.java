@@ -1,5 +1,6 @@
 package com.scoddle.unprecendentedcustomizer.utils;
 
+import com.scoddle.unprecendentedcustomizer.UnprecendentedCustomizer;
 import com.scoddle.unprecendentedcustomizer.utils.reference.IReference;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,18 +14,22 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LanguageFilesUtils implements IReference {
+public class LanguageFilesUtils {
 
     private static Map<File, Map<String, String>> languages = new HashMap<>();
 
     public static String currentLang = "";
 
     public static String getValue(String language, String valueName) {
+        UnprecendentedCustomizer plugin = UnprecendentedCustomizer.getPlugin(UnprecendentedCustomizer.class);
         File langFile = new File(plugin.getDataFolder() + "/lang", language + ".yml");
         return languages.get(langFile).get(valueName);
     }
 
     public static void loadValues() {
+
+        UnprecendentedCustomizer plugin = UnprecendentedCustomizer.getPlugin(UnprecendentedCustomizer.class);
+
         File langFolder = new File(plugin.getDataFolder() + "/lang");
         if (!langFolder.exists()) {
             langFolder.mkdir();
@@ -39,7 +44,7 @@ public class LanguageFilesUtils implements IReference {
                 InputStream in = plugin.getResource("eng.yml");
                 Files.copy(in, enFile.toPath());
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -49,7 +54,7 @@ public class LanguageFilesUtils implements IReference {
                 InputStream in = plugin.getResource("ger.yml");
                 Files.copy(in, geFile.toPath());
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -64,7 +69,7 @@ public class LanguageFilesUtils implements IReference {
             }
             languages.put(file, values);
             String prefix = plugin.getConfig().getString("prefix");
-            Bukkit.getConsoleSender().sendMessage(methods.translate(prefix + " &a" + file.getName() + " loaded!"));
+            Bukkit.getConsoleSender().sendMessage(IReference.methods.translate(prefix + " &a" + file.getName() + " loaded!"));
         }
     }
 }
