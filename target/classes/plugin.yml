@@ -1,0 +1,7 @@
+name: UnprecendentedCustomizer
+version: '1.0-SNAPSHOT'
+main: com.scoddle.unprecendentedcustomizer.UnprecendentedCustomizer
+api-version: 1.16
+commands:
+  "test":
+    description: Test cmd lul
