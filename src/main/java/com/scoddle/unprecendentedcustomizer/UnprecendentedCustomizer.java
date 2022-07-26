@@ -1,5 +1,6 @@
 package com.scoddle.unprecendentedcustomizer;
 
+import com.scoddle.unprecendentedcustomizer.commands.AdminCommand;
 import com.scoddle.unprecendentedcustomizer.commands.TestCommand;
 import com.scoddle.unprecendentedcustomizer.listeners.InventoryClickListener;
 import com.scoddle.unprecendentedcustomizer.listeners.PlayerChatListener;
@@ -29,6 +30,7 @@ public final class UnprecendentedCustomizer extends JavaPlugin {
         regListener(new PlayerChatListener());
 
         addCommand("test", new TestCommand());
+        addCommand("admin", new AdminCommand());
 
     }
 
