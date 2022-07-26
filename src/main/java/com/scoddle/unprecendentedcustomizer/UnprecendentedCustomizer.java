@@ -1,5 +1,6 @@
 package com.scoddle.unprecendentedcustomizer;
 
+import com.nthbyte.dialogue.DialogueAPI;
 import com.scoddle.unprecendentedcustomizer.commands.TestCommand;
 import com.scoddle.unprecendentedcustomizer.listeners.InventoryClickListener;
 import com.scoddle.unprecendentedcustomizer.listeners.PlayerChatListener;
@@ -21,6 +22,8 @@ public final class UnprecendentedCustomizer extends JavaPlugin {
         saveDefaultConfig();
 
         guiManager = new GuiManager();
+
+        DialogueAPI.hook(this);
 
         //LanguageFilesUtils.loadValues();
 
