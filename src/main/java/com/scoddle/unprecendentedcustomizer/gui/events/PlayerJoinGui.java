@@ -82,8 +82,8 @@ public class PlayerJoinGui extends IGUI {
 
     @Override
     protected void setDisplayName() {
-        join_meta.setDisplayName(methods.translate("&r&aSet"));
-        get_join_meta.setDisplayName(methods.translate("&r&cGet"));
+        join_meta.setDisplayName(methods.translate("&r&aSet Join Message"));
+        get_join_meta.setDisplayName(methods.translate("&r&cGet Join Message"));
         prop_meta.setDisplayName(methods.translate("&r&7Player Properties"));
     }
 
@@ -115,12 +115,8 @@ public class PlayerJoinGui extends IGUI {
 
                 case CARROT_ON_A_STICK: {
 
-                    try {
-                        methods.sendMessage("Message: " + ev.getJoinMessage(), player);
-                    }
-                    catch (NullPointerException exc) {
-                        methods.sendMessage("&cA player needs to join, for this to work", player);
-                    }
+                    methods.sendMessage("Current Join message is: ", player);
+                    methods.sendMessage(evfile.getValue("join-msg"), player);
 
                     e.setCancelled(true);
                     break;
@@ -153,27 +149,14 @@ public class PlayerJoinGui extends IGUI {
 
         if(capture) {
 
-            PersistentDataContainer dataContainer = player.getPersistentDataContainer();
-            dataContainer.set(new NamespacedKey(plugin, "join-message"), PersistentDataType.STRING, message);
+            evfile.setValue("join-msg", message);
+            evfile.save();
 
-            join_msg = message;
             capture = false;
             e.setCancelled(true);
+
+            methods.sendMessage("&aSet new join message to: " + message, player);
         }
-
-        methods.sendMessage("Set new join message", player);
-
-    }
-
-    public void onPlayerJoin(PlayerJoinEvent e) {
-        /*ev = e;
-        playr = e.getPlayer();
-        join_msg = e.getJoinMessage();
-        assert join_msg != null;
-        if(capture) {
-            e.setJoinMessage(methods.translatePlayerName(join_msg, playr));
-        }*/
-        System.out.println("Called onPlayerJoin in PlayerJoinGui");
     }
 
     public Inventory getGui() {

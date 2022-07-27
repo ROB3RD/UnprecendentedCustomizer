@@ -14,21 +14,18 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LanguageFilesUtils {
+public class LanguageFilesUtils implements IReference{
 
-    private static Map<File, Map<String, String>> languages = new HashMap<>();
+    private Map<File, Map<String, String>> languages = new HashMap<>();
 
-    public static String currentLang = "";
+    private String currentLang = "";
 
-    public static String getValue(String language, String valueName) {
-        UnprecendentedCustomizer plugin = UnprecendentedCustomizer.getPlugin(UnprecendentedCustomizer.class);
+    public String getValue(String language, String valueName) {
         File langFile = new File(plugin.getDataFolder() + "/lang", language + ".yml");
         return languages.get(langFile).get(valueName);
     }
 
-    public static void loadValues() {
-
-        UnprecendentedCustomizer plugin = UnprecendentedCustomizer.getPlugin(UnprecendentedCustomizer.class);
+    public void setup() {
 
         File langFolder = new File(plugin.getDataFolder() + "/lang");
         if (!langFolder.exists()) {
