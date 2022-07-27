@@ -8,7 +8,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public abstract class IGUI implements IReference{
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class IGUI implements IReference {
 
     String name;
     int size;
@@ -24,14 +27,19 @@ public abstract class IGUI implements IReference{
     protected abstract void init();
 
     protected abstract void addItems();
+
     protected abstract void addItemMeta();
+
     protected abstract void setDisplayName();
+
     protected abstract void setItemMeta();
+
     public abstract void onClick(InventoryClickEvent e);
+
     public abstract void onChat(AsyncPlayerChatEvent e);
 
     protected void fill(ItemStack m, Inventory gui) {
-        for(int i = 0; i < getSize(); i++) {
+        for (int i = 0; i < getSize(); i++) {
             gui.setItem(i, m);
         }
     }
@@ -50,4 +58,5 @@ public abstract class IGUI implements IReference{
     public int getSize() {
         return size;
     }
+
 }

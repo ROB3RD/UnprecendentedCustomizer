@@ -5,5 +5,9 @@ api-version: 1.16
 commands:
   "test":
     description: Test cmd lul
-  admin:
+  "admin":
     description: Admin Command
+  "ucrl":
+    description: Reloads UC
+  "ab":
+    description: AB

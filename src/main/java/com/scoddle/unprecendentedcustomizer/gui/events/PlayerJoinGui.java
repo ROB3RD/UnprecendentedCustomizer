@@ -1,21 +1,16 @@
-package com.scoddle.unprecendentedcustomizer.gui;
+package com.scoddle.unprecendentedcustomizer.gui.events;
 
-import com.scoddle.unprecendentedcustomizer.listeners.PlayerJoinListener;
+import com.scoddle.unprecendentedcustomizer.gui.player.PlayerCustomizerGui;
 import com.scoddle.unprecendentedcustomizer.utils.reference.IGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Objects;
 
@@ -36,10 +31,13 @@ public class PlayerJoinGui extends IGUI {
     ItemStack set_join;
     ItemStack get_join;
     ItemStack properties;
+    ItemStack msg_on_join;
+    boolean msg_onjoin = false;
 
     ItemMeta join_meta;
     ItemMeta get_join_meta;
     ItemMeta prop_meta;
+    ItemMeta msg_join_meta;
 
     public PlayerJoinGui() {
         super("Join Event Config", 54);
@@ -62,6 +60,7 @@ public class PlayerJoinGui extends IGUI {
         gui.setItem(20, set_join);
         gui.setItem(22, properties);
         gui.setItem(38, get_join);
+        gui.setItem(45, msg_on_join);
     }
 
     @Override
@@ -69,6 +68,7 @@ public class PlayerJoinGui extends IGUI {
         set_join = new ItemStack(Material.PAPER);
         properties = new ItemStack(Material.PLAYER_HEAD);
         get_join = new ItemStack(Material.CARROT_ON_A_STICK);
+        msg_on_join = new ItemStack(Material.GRAY_WOOL);
 
         fill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
     }
@@ -78,6 +78,7 @@ public class PlayerJoinGui extends IGUI {
         join_meta = set_join.getItemMeta();
         get_join_meta = get_join.getItemMeta();
         prop_meta = properties.getItemMeta();
+        msg_join_meta = msg_on_join.getItemMeta();
     }
 
     @Override
@@ -85,6 +86,7 @@ public class PlayerJoinGui extends IGUI {
         join_meta.setDisplayName(methods.translate("&r&aSet Join Message"));
         get_join_meta.setDisplayName(methods.translate("&r&cGet Join Message"));
         prop_meta.setDisplayName(methods.translate("&r&7Player Properties"));
+        msg_join_meta.setDisplayName(methods.translate("&7Receive Message on Join"));
     }
 
     @Override
@@ -104,7 +106,6 @@ public class PlayerJoinGui extends IGUI {
             switch (Objects.requireNonNull(e.getCurrentItem()).getType()) {
 
                 case PAPER: {
-                    methods.sendMessage("&4Doesnt work yet so fuck off", player);
                     player.closeInventory();
                     methods.sendMessage("&7Please type the new Join message in chat.", player);
                     methods.sendMessage("&7You can use <player> to set the name of the player who joined", player);
@@ -127,6 +128,22 @@ public class PlayerJoinGui extends IGUI {
                     player.closeInventory();
                     PlayerCustomizerGui.instance.createGui(player);
                     player.openInventory(PlayerCustomizerGui.instance.getGui());
+
+                    e.setCancelled(true);
+                    break;
+                }
+
+                case GRAY_WOOL: {
+
+                    if(evfile.getValue("on-join-msg").equalsIgnoreCase("true")) {
+                        evfile.setValue("on-join-msg", "false");
+                        methods.sendMessage("&7Message on join: &coff", player);
+                    }
+                    else {
+                        evfile.setValue("on-join-msg", "true");
+                        methods.sendMessage("&7Message on join: &aon", player);
+                    }
+
 
                     e.setCancelled(true);
                     break;

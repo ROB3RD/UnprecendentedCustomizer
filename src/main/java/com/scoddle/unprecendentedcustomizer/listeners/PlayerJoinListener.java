@@ -1,14 +1,11 @@
 package com.scoddle.unprecendentedcustomizer.listeners;
 
-import com.scoddle.unprecendentedcustomizer.gui.PlayerJoinGui;
 import com.scoddle.unprecendentedcustomizer.utils.reference.IReference;
-import org.bukkit.NamespacedKey;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
 public class PlayerJoinListener implements Listener, IReference {
 
@@ -18,24 +15,24 @@ public class PlayerJoinListener implements Listener, IReference {
 
         Player player = e.getPlayer();
 
-        PersistentDataContainer dataContainer = player.getPersistentDataContainer();
+        e.setJoinMessage(methods.translatePlayerName(evfile.getValue("join-msg"), player));
 
-        String joinMessage;
-
-        try {
-            joinMessage = dataContainer.get(new NamespacedKey(plugin, "join-message"), PersistentDataType.STRING);
-            assert joinMessage != null;
-            e.setJoinMessage(methods.translatePlayerName(joinMessage, player));
+        if(evfile.getValue("join-gamemode").equalsIgnoreCase("CREATIVE")) {
+            player.setGameMode(GameMode.CREATIVE);
         }
-        catch (NullPointerException exception) {
-            e.setJoinMessage(methods.translate("&a" + player.getDisplayName() + " &7has joined the server."));
-            return;
+        else if(evfile.getValue("join-gamemode").equalsIgnoreCase("SURVIVAL")) {
+            player.setGameMode(GameMode.SURVIVAL);
+        }
+        else if(evfile.getValue("join-gamemode").equalsIgnoreCase("ADVENTURE")) {
+            player.setGameMode(GameMode.ADVENTURE);
+        }
+        else if(evfile.getValue("join-gamemode").equalsIgnoreCase("SPECTATOR")) {
+            player.setGameMode(GameMode.SPECTATOR);
         }
 
-        //e.setJoinMessage(methods.translate("&a" + player.getDisplayName() + " &7has joined the server."));
-
-        PlayerJoinGui playerJoinGui = new PlayerJoinGui();
-        playerJoinGui.onPlayerJoin(e);
+        if(evfile.getValue("on-join-msg").equalsIgnoreCase("true")) {
+            player.sendMessage("MESSAGE ON JOIN");
+        }
     }
 
 }

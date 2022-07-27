@@ -1,4 +1,4 @@
-package com.scoddle.unprecendentedcustomizer.gui;
+package com.scoddle.unprecendentedcustomizer.gui.player;
 
 import com.scoddle.unprecendentedcustomizer.utils.reference.IGUI;
 import org.bukkit.Bukkit;
@@ -38,8 +38,6 @@ public class PlayerCustomizerGui extends IGUI {
         addItemMeta();
         setDisplayName();
         setItemMeta();
-
-        //addItem(gamemode, "Test", Material.LIME_WOOL);
         init();
     }
 
@@ -98,8 +96,15 @@ public class PlayerCustomizerGui extends IGUI {
 
                 case STONE: {
 
-                    methods.sendMessage("&bChanges gamemode of player who joined :DDDD (doesnt work xD)", player);
+                    player.closeInventory();
+                    PlayerGamemodeGui.instance.createGui(player);
+                    player.openInventory(PlayerGamemodeGui.instance.getGui());
 
+                    e.setCancelled(true);
+                    break;
+                }
+
+                case GRAY_STAINED_GLASS_PANE: {
                     e.setCancelled(true);
                     break;
                 }

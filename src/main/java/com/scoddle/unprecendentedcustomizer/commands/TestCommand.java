@@ -1,7 +1,6 @@
 package com.scoddle.unprecendentedcustomizer.commands;
 
-import com.scoddle.unprecendentedcustomizer.gui.PlayerCustomizerGui;
-import com.scoddle.unprecendentedcustomizer.gui.PlayerJoinGui;
+import com.scoddle.unprecendentedcustomizer.gui.events.PlayerJoinGui;
 import com.scoddle.unprecendentedcustomizer.utils.reference.ICMD;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

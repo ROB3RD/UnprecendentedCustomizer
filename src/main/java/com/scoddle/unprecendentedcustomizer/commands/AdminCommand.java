@@ -90,7 +90,7 @@ public class AdminCommand implements ICMD {
 
             try {
                 admin = dataContainer.get(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER);
-            }catch (NullPointerException exception) {
+            } catch (NullPointerException exception) {
                 admin = 0;
             }
 
@@ -98,7 +98,8 @@ public class AdminCommand implements ICMD {
                 dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 1);
                 methods.sendConsoleMessage(methods.translatePlayerName("success! 1", target));
                 return true;
-            }else if (admin == 1) {
+            }
+            else if (admin == 1) {
                 dataContainer.set(new NamespacedKey(plugin, "admin"), PersistentDataType.INTEGER, 0);
                 methods.sendConsoleMessage(methods.translatePlayerName("success! 2", target));
                 return true;

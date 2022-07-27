@@ -1,7 +1,8 @@
 package com.scoddle.unprecendentedcustomizer.utils;
 
-import com.scoddle.unprecendentedcustomizer.gui.PlayerCustomizerGui;
-import com.scoddle.unprecendentedcustomizer.gui.PlayerJoinGui;
+import com.scoddle.unprecendentedcustomizer.gui.player.PlayerCustomizerGui;
+import com.scoddle.unprecendentedcustomizer.gui.events.PlayerJoinGui;
+import com.scoddle.unprecendentedcustomizer.gui.player.PlayerGamemodeGui;
 import com.scoddle.unprecendentedcustomizer.utils.reference.IGUI;
 import com.scoddle.unprecendentedcustomizer.utils.reference.IReference;
 
@@ -18,6 +19,7 @@ public class GuiManager implements IReference {
     public void init() {
         addGui(new PlayerCustomizerGui());
         addGui(new PlayerJoinGui());
+        addGui(new PlayerGamemodeGui());
     }
 
     private void addGui(IGUI gui) {
