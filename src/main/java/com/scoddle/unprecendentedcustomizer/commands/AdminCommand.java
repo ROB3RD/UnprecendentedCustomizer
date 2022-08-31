@@ -11,6 +11,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import javax.naming.Name;
+import java.util.List;
 
 public class AdminCommand implements ICMD {
 
@@ -29,7 +30,7 @@ public class AdminCommand implements ICMD {
 
             try {
                 target = server.getPlayerExact(args[0]);
-            }catch (NullPointerException exception) {
+            } catch (NullPointerException exception) {
                 methods.sendMessage("falsch! 2", player);
                 return false;
             }
@@ -60,7 +61,7 @@ public class AdminCommand implements ICMD {
                 return true;
             }
 
-        }else if (sender instanceof ConsoleCommandSender) {
+        } else if (sender instanceof ConsoleCommandSender) {
 
             ConsoleCommandSender ccs = (ConsoleCommandSender) sender;
 
@@ -109,4 +110,8 @@ public class AdminCommand implements ICMD {
         return true;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        return null;
+    }
 }

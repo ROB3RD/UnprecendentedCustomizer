@@ -8,6 +8,9 @@ import com.scoddle.unprecendentedcustomizer.listeners.InventoryClickListener;
 import com.scoddle.unprecendentedcustomizer.listeners.PlayerChatListener;
 import com.scoddle.unprecendentedcustomizer.listeners.PlayerJoinListener;
 import com.scoddle.unprecendentedcustomizer.utils.GuiManager;
+import com.scoddle.unprecendentedcustomizer.utils.files.XFile;
+import com.scoddle.unprecendentedcustomizer.utils.files.XFileManager;
+import com.scoddle.unprecendentedcustomizer.utils.files.eventfiles.PlayerJoinEventFile;
 import com.scoddle.unprecendentedcustomizer.utils.reference.IReference;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
@@ -16,21 +19,41 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class UnprecendentedCustomizer extends JavaPlugin implements IReference {
 
     private GuiManager guiManager;
+    private XFileManager xFileManager;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
+
+        xFileManager = new XFileManager();
+        guiManager = new GuiManager();
+
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
-        evfile.setup();
+        /*evfile.setup();
         evfile.get().options().copyDefaults();
-        evfile.save();
+        evfile.save();*/
 
         lang.setup();
-        System.out.println("Setup files!");
 
-        guiManager = new GuiManager();
+        XFile testFile = getxFileManager().getFileByClass(PlayerJoinEventFile.class);
+/*        System.out.println(testFile.getFileName());
+        System.out.println(testFile.getFile());
+        System.out.println(testFile.get());     */
+
+        System.out.println();
+
+        for(XFile files : xFileManager.getFiles()) {
+            files.setup();
+            files.get().options().copyDefaults();
+            files.save();
+
+            // Debug
+            System.out.println(files.get().toString());
+        }
+
+        System.out.println("Setup files!");
 
         regListener(new PlayerJoinListener());
         regListener(new InventoryClickListener());
@@ -41,7 +64,7 @@ public final class UnprecendentedCustomizer extends JavaPlugin implements IRefer
         addCommand("ucrl", new Reload());
         addCommand("AB", new AB());
 
-        System.out.println("UC lodaded!");
+        System.out.println("UC loaded!");
 
     }
 
@@ -60,5 +83,9 @@ public final class UnprecendentedCustomizer extends JavaPlugin implements IRefer
 
     public GuiManager getGuiManager() {
         return guiManager;
+    }
+
+    public XFileManager getxFileManager() {
+        return xFileManager;
     }
 }

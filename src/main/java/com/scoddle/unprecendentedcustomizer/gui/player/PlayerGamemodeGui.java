@@ -1,5 +1,7 @@
 package com.scoddle.unprecendentedcustomizer.gui.player;
 
+import com.scoddle.unprecendentedcustomizer.utils.files.XFile;
+import com.scoddle.unprecendentedcustomizer.utils.files.eventfiles.PlayerJoinEventFile;
 import com.scoddle.unprecendentedcustomizer.utils.reference.IGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,7 +20,16 @@ public class PlayerGamemodeGui extends IGUI {
 
     Inventory gui;
 
-    ItemStack fill;
+    ItemStack blue;
+    ItemStack light_blue;
+    ItemStack green;
+    ItemStack lime;
+    ItemStack gray;
+    ItemStack magenta;
+    ItemStack purple;
+    ItemStack yellow;
+    ItemStack orange;
+    ItemStack white;
 
     ItemStack creative;
     ItemStack survival;
@@ -35,7 +46,7 @@ public class PlayerGamemodeGui extends IGUI {
     }
 
     @Override
-    public void createGui(Player player) {
+    public void createGui(Player player, String path) {
         gui = Bukkit.createInventory(player, getSize(), getName());
 
         addItems();
@@ -47,7 +58,18 @@ public class PlayerGamemodeGui extends IGUI {
 
     @Override
     protected void init() {
-        fill(fill, gui);
+
+        fill(blue, gui, 0, 18);
+        fill(light_blue, gui, 1, 19);
+        fill(green, gui, 2, 20);
+        fill(lime, gui, 3, 21);
+        fill(gray, gui, 4, 22);
+        fill(magenta, gui, 5, 23);
+        fill(purple, gui, 6, 24);
+        fill(yellow, gui, 7, 25);
+        fill(orange, gui, 8, 26);
+
+        row(white, gui, 9);
 
         gui.setItem(10, creative);
         gui.setItem(12, survival);
@@ -58,7 +80,16 @@ public class PlayerGamemodeGui extends IGUI {
     @Override
     protected void addItems() {
 
-        fill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        blue = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
+        light_blue = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+        green = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        lime = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
+        gray = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        magenta = new ItemStack(Material.MAGENTA_STAINED_GLASS_PANE);
+        purple = new ItemStack(Material.PURPLE_STAINED_GLASS_PANE);
+        yellow = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
+        orange = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
+        white = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
 
         creative = new ItemStack(Material.STONE);
         survival = new ItemStack(Material.GRASS_BLOCK);
@@ -90,8 +121,12 @@ public class PlayerGamemodeGui extends IGUI {
         spec.setItemMeta(spec_meta);
     }
 
+    PlayerCustomizerGui playerCustomizerGui = new PlayerCustomizerGui();
+
     @Override
     public void onClick(InventoryClickEvent e) {
+
+        XFile file = plugin.getxFileManager().getFileByClass(PlayerJoinEventFile.class);
 
         Player player = (Player) e.getWhoClicked();
 
@@ -99,28 +134,28 @@ public class PlayerGamemodeGui extends IGUI {
             switch (Objects.requireNonNull(e.getCurrentItem()).getType()) {
 
                 case STONE: {
-                    evfile.setValue("join-gamemode", "CREATIVE");
+                    file.setValue(playerCustomizerGui.getPath() + "-gamemode", "CREATIVE");
                     methods.sendMessage("&aSelected Creative!", player);
                     e.setCancelled(true);
                     break;
                 }
 
                 case GRASS_BLOCK: {
-                    evfile.setValue("join-gamemode", "SURVIVAL");
+                    file.setValue(playerCustomizerGui.getPath() + "-gamemode", "SURVIVAL");
                     methods.sendMessage("&aSelected Survival!", player);
                     e.setCancelled(true);
                     break;
                 }
 
                 case STONE_SWORD: {
-                    evfile.setValue("join-gamemode", "ADVENTURE");
+                    file.setValue(playerCustomizerGui.getPath() + "-gamemode", "ADVENTURE");
                     methods.sendMessage("&aSelected Adventure!", player);
                     e.setCancelled(true);
                     break;
                 }
 
                 case ENDER_EYE: {
-                    evfile.setValue("join-gamemode", "SPECTATOR");
+                    file.setValue(playerCustomizerGui.getPath() + "-gamemode", "SPECTATOR");
                     methods.sendMessage("&aSelected Spectator!", player);
                     e.setCancelled(true);
                     break;

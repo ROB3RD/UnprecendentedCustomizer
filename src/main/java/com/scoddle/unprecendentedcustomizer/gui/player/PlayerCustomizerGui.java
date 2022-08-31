@@ -16,22 +16,27 @@ public class PlayerCustomizerGui extends IGUI {
 
     Inventory gui;
 
-    ItemStack fill;
+    ItemStack red;
+    ItemStack pink;
+    ItemStack magenta;
+    ItemStack purple;
+    ItemStack light_blue;
+    ItemStack blue;
 
     ItemStack gamemode;
     ItemStack effect;
+    ItemStack health;
 
     ItemMeta gm_meta;
     ItemMeta effect_meta;
-
-    public static PlayerCustomizerGui instance = new PlayerCustomizerGui();
+    ItemMeta health_meta;
 
     public PlayerCustomizerGui() {
         super("Player Properties", 54);
     }
 
     @Override
-    public void createGui(Player p) {
+    public void createGui(Player p, String path) {
         gui = Bukkit.createInventory(p, getSize(), getName());
 
         addItems();
@@ -43,38 +48,51 @@ public class PlayerCustomizerGui extends IGUI {
 
     @Override
     protected void init() {
+        row(red, gui, 0);
+        row(pink, gui, 9);
+        row(magenta, gui, 18);
+        row(purple, gui, 27);
+        row(light_blue, gui, 36);
+        row(blue, gui, 45);
 
-        fill(fill, gui);
-
-        gui.setItem(47, gamemode);
-        gui.setItem(29, effect);
+        gui.setItem(38, gamemode);
+        gui.setItem(11, effect);
+        gui.setItem(15, health);
     }
 
     @Override
     protected void addItems() {
-
-        fill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        red = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+        pink = new ItemStack(Material.PINK_STAINED_GLASS_PANE);
+        magenta = new ItemStack(Material.MAGENTA_STAINED_GLASS_PANE);
+        purple = new ItemStack(Material.PURPLE_STAINED_GLASS_PANE);
+        light_blue = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+        blue = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
 
         gamemode = new ItemStack(Material.STONE);
         effect = new ItemStack(Material.POTION);
+        health = new ItemStack(Material.RED_DYE);
     }
 
     @Override
     protected void addItemMeta() {
         gm_meta = gamemode.getItemMeta();
         effect_meta = effect.getItemMeta();
+        health_meta = health.getItemMeta();
     }
 
     @Override
     protected void setDisplayName() {
         gm_meta.setDisplayName(methods.translate("&r&bGamemode"));
         effect_meta.setDisplayName(methods.translate("&r&1Potion Effect"));
+        health_meta.setDisplayName(methods.translate("&cHealth"));
     }
 
     @Override
     protected void setItemMeta() {
         gamemode.setItemMeta(gm_meta);
         effect.setItemMeta(effect_meta);
+        health.setItemMeta(health_meta);
     }
 
     @Override
@@ -97,8 +115,18 @@ public class PlayerCustomizerGui extends IGUI {
                 case STONE: {
 
                     player.closeInventory();
-                    PlayerGamemodeGui.instance.createGui(player);
+                    PlayerGamemodeGui.instance.createGui(player, getPath());
                     player.openInventory(PlayerGamemodeGui.instance.getGui());
+
+                    e.setCancelled(true);
+                    break;
+                }
+
+                case RED_DYE: {
+
+                    player.closeInventory();
+                    PlayerHealthGui.instance.createGui(player, getPath());
+                    player.openInventory(PlayerHealthGui.instance.getGui());
 
                     e.setCancelled(true);
                     break;

@@ -1,9 +1,12 @@
 package com.scoddle.unprecendentedcustomizer.commands;
 
+import com.scoddle.unprecendentedcustomizer.utils.files.XFile;
 import com.scoddle.unprecendentedcustomizer.utils.reference.ICMD;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public class Reload implements ICMD {
 
@@ -14,9 +17,13 @@ public class Reload implements ICMD {
 
         if(player.hasPermission(perm.addPerm("reload"))) {
 
-            evfile.reload();
+            //evfile.reload();
             plugin.reloadConfig();
             lang.reload();
+
+            for(XFile x : plugin.getxFileManager().getFiles()) {
+                x.reload();
+            }
 
             methods.sendMessage("&aReloaded &cU&bC!", player);
         }
@@ -25,5 +32,10 @@ public class Reload implements ICMD {
         }
 
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        return null;
     }
 }

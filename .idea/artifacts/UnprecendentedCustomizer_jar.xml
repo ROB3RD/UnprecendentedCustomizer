@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="UnprecendentedCustomizer:jar">
-    <output-path>$PROJECT_DIR$/export</output-path>
+    <output-path>M:/Server/1.19_Test_Server/plugins</output-path>
     <root id="archive" name="UnprecendentedCustomizer.jar">
       <element id="module-output" name="UnprecendentedCustomizer" />
     </root>

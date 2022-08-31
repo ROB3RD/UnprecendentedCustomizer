@@ -1,0 +1,7 @@
+join-msg: "&a<player> &7joined the game!"
+join-gamemode: "SURVIVAL"
+on-join-msg: false
+join-add: 0
+join-subtract: 0
+join-multiply: 0
+join-divide: 0
